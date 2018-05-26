@@ -177,7 +177,30 @@ class Jobs extends My_Controller
         $this->load->view('jobs/create', $page_data);
         $this->load->view('templates/footer');
       } else {
-        // code...
+        $save_data = array(
+          'job_title' => $this->input->post('job_title'),
+          'job_desc' => $this->input->post('job_desc'),
+          'cat_id' => $this->input->post('cat_id'),
+          'type_id' => $this->input->post('type_id'),
+          'type_id' => $this->input->post('type_id'),
+          'loc_id' => $this->input->post('loc_id'),
+          'job_start_date' => $this->input->post('start_y').'-'.$this->input->post('start_m').'-'.$this->input->post('start_d'),
+          'job_rate' => $this->input->post('job_rate'),
+          'job_advertiser_name' => $this->input->post('job_advertiser_name'),
+          'job_advertiser_phone' => $this->input->post('job_advertiser_phone'),
+          'job_sunset_date' => $this->input->post('sunset_y').'-'.$this->input->post('sunset_m').'-'.$this->input->post('sunset_d')
+        );
+
+        if ($this->Jobs_model->save_job($save_data)) {
+          $this->session->set_flashdata('flash_message', 'Job ad Saved Successfully');
+          redirect('jobs/create/');
+        } else {
+          $this->session->set_flashdata('flash_message', 'Error: Job ad was not saved');
+          redirect('jobs');
+        }
+
+
+
       }
 
     }
@@ -185,5 +208,19 @@ class Jobs extends My_Controller
     // Accessed if the user clicks on the apply button or the job title
     public function apply()
     {
+      $this->form_validation->set_rules('job_id', 'Job ID', 'required');
+      $this->form_validation->set_rules('app_name', 'Applicant Name', 'required');
+      $this->form_validation->set_rules('app_email', 'Applicant Email', 'required');
+      $this->form_validation->set_rules('app_phone', 'Applicant Phone', 'required');
+      $this->form_validation->set_rules('app_cover_note', 'Applicant Cover Note', 'required');
+
+      if ($this->input->post()) {
+        $page_data['job_id'] = $this->input->post('job_id');
+      } else {
+        $page_data['job_id'] = $this->uri->segment(3);
+      }
+
+      $page_data['query'] = $this->Jobs_model->get_job($page_data['job_id']);
+
     }
 }
