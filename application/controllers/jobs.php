@@ -222,5 +222,97 @@ class Jobs extends My_Controller
 
       $page_data['query'] = $this->Jobs_model->get_job($page_data['job_id']);
 
+      if ($page_data['query']->num_rows() == 1) {
+        foreach ($page_data['query'] as $row) {
+          $page_data['job_title'] = $row->job_title;
+          $page_data['job_id'] = $row->job_id;
+          $job_advertiser_name = $row->job_advertiser_name;
+          $job_advertiser_email = $row->job_advertiser_email;
+
+        }
+      } else {
+        $this->session->set_flashdata('flash_message', 'Job No Longer Exists!');
+        rediret('jobs');
+      }
+
+      if ($this->form_validation->run() == false) {
+        $page_data['job_id'] = array(
+          'name' => 'job_id',
+          'class' => 'form_control',
+          'id' => 'job_id',
+          'value' => set_value('job_id', ''),
+          'maxlength' => '100',
+          'size' => '35'
+        );
+
+        $page_data['app_name'] = array(
+          'name' => 'app_name',
+          'class' => 'form-control',
+          'id' => 'app_name',
+          'value' => set_value('app_name', ''),
+          'maxlength' => '100',
+          'size' => '35'
+        );
+
+        $page_data['app_email'] = array(
+          'name' => 'app_email',
+          'class' => 'form-control',
+          'id' => 'app_email',
+          'value' => set_value('app_email', ''),
+          'maxlength' => '100',
+          'size' => '35'
+        );
+
+        $page_data['app_phone'] = array(
+          'name' => 'app_phone',
+          'class' => 'form-control',
+          'id' => 'app_phone',
+          'value' => set_value('app_phone', ''),
+          'maxlength' => '100',
+          'size' => '35'
+        );
+
+        $page_data['app_cover_note'] = array(
+          'name' => 'app_cover_note',
+          'class' => 'form-control',
+          'id' => 'app_cover_note',
+          'value' => set_value('app_cover_note', ''),
+          'maxlength' => '100',
+          'size' => '35'
+        );
+
+        $this->load->view('templates/header');
+        $this->load->view('jobs/apply', $page_data);
+        $this->load->view('templates/footer');
+
+
+      } else {
+        $body = "Dear %job_advertiser_name%,\n\n";
+        $body .= "%app_name% is applying for the position of %job_title%,\n\n";
+        $body .= "The details of the application are:\n\n";
+        $body .= "Applicant: %app_name%,\n\n";
+        $body .= "Job Title: %job_title%,\n\n";
+        $body .= "Applicant Email: %app_email%,\n\n";
+        $body .= "Applicant Phone: %app_phone%,\n\n";
+        $body .= "Cover Note: %app_cover_note%,\n\n";
+        $body = str_replace('%job_advertiser_name%', $job_advertiser_name, $body);
+        $body = str_replace('%app_name%', $this->input->post('app_name'), $body);
+        $body = str_replace('%job_title%', $page_data['job_title'], $body);
+        $body = str_replace('%app_email%', $this->input->post('app_email'), $body);
+        $body = str_replace('%app_phone%', $this->input->post('app_phone'), $body);
+        $body = str_replace('%app_cover_note%', $this->input->post('app_cover_note'), $body);
+
+        if (mail($job_advertiser_email, 'Application for ' . $page_data['job_title'], $body)) {
+          $this->session->set_flashdata('flash_message', 'Application was submitted successfully');
+        } else {
+          $this->session->set_flashdata('flash_message', 'Application Submission Failed');
+        }
+
+        redirect('jobs/apply/' . $page_data['job_id']);
+
+      }
+
+
+
     }
 }
