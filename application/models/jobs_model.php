@@ -9,7 +9,7 @@ class Jobs_model extends CI_Model{
   // Displays all jobs
   function get_jobs($search_string){
     if ($search_string == null) {
-      $query = "SELECT * FROM jobs WHERE DATE(NOW()) < DATE(job_sunset_date)";
+      $query = "SELECT * FROM jobs";
     } else {
       $query = "SELECT * FROM jobs where job_title LIKE '%$search_string%' OR
                 job_desc LIKE '%$search_string%' AND DATE(NOW()) < DATE(job_sunset_date)";

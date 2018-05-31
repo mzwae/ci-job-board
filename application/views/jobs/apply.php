@@ -39,4 +39,28 @@
 <p class="lead">Apply to <?=$job_title?></p>
 <div class="span12">
   <?php echo form_open('jobs/apply', 'role="form" class="form"'); ?>
+  <div class="form-group">
+    <?php echo form_error('app_email'); ?>
+    <label for="app_email">Email</label>
+    <?php echo form_input($app_email); ?>
+  </div>
+
+  <div class="form-group">
+    <?php echo form_error('app_phone'); ?>
+    <label for="app_phone">Phone</label>
+    <?php echo form_input($app_phone); ?>
+  </div>
+
+  <div class="form-group">
+    <?php echo form_error('app_cover_note'); ?>
+    <label for="app_cover_note">Cover Note</label>
+    <?php echo form_textarea($app_cover_note); ?>
+  </div>
+
+  <input type="hidden" name="job_id" value="<?=$this->uri->segment(3)?>">
+
+  <div class="form-group">
+    <button type="submit" class="btn btn-success">Submit</button> or <a href="jobs">Cancel</a>
+  </div>
+  <?php echo form_close(); ?>
 </div>

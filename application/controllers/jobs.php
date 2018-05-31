@@ -34,6 +34,7 @@ class Jobs extends My_Controller
         $this->load->view('jobs/view', $page_data);
         $this->load->view('templates/footer');
       } else {
+        $page_data['query'] = $this->Jobs_model->get_jobs($this->input->post('search_string'));
         $this->load->view('templates/header');
         $this->load->view('jobs/view', $page_data);
         $this->load->view('templates/footer');
@@ -232,7 +233,7 @@ class Jobs extends My_Controller
         }
       } else {
         $this->session->set_flashdata('flash_message', 'Job No Longer Exists!');
-        rediret('jobs');
+        redirect('jobs');
       }
 
       if ($this->form_validation->run() == false) {
