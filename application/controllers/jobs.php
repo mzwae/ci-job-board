@@ -219,8 +219,9 @@ class Jobs extends My_Controller
         $page_data['job_id'] = $this->input->post('job_id');
       } else {
         $page_data['job_id'] = $this->uri->segment(3);
-      }
 
+
+      }
       $page_data['query'] = $this->Jobs_model->get_job($page_data['job_id']);
 
       if ($page_data['query']->num_rows() == 1) {

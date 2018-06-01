@@ -19,7 +19,7 @@
   <?php foreach($query->result() as $row): ?>
     <tr>
       <td>
-        <a href="jobs/apply/<?=$row->job_id?>"><?=$row->job_title?></a>
+        <a href="<?=base_url()?>jobs/apply/<?=$row->job_id?>"><?=$row->job_title?></a>
         <br>
         <?php echo word_limiter($row->job_desc, 50); ?>
       </td>
@@ -29,7 +29,7 @@
         Rate is &pound;<?=$row->job_rate?>
       </td>
       <td>
-        <a href="jobs/apply/<?=$row->job_id?>">Apply</a>
+        <a href="<?=base_url()?>jobs/apply/<?=$row->job_id?>">Apply</a>
       </td>
     </tr>
   <?php endforeach; ?>

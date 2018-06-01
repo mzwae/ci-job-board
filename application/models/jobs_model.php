@@ -27,15 +27,12 @@ class Jobs_model extends CI_Model{
 
   // Fetches the details of a specific job
   function get_job($job_id){
-    $query = "SELECT * FROM jobs, categories, types, locations WHERE
-              categories.cat_id = jobs.cat_id AND
-              types.type_id = jobs.type_id AND
-              locations.loc_id = jobs.loc_id AND
-              job_id = ? AND
-              DATE(NOW() < DATE(job_sunset_date))";
+    echo "<h1>Job id from model is $job_id</h1>";
+    $query = "SELECT * FROM jobs WHERE job_id = ?";
 
     $result = $this->db->query($query, array($job_id));
     if ($result) {
+      print_r($result);
       return $result;
     } else {
       return false;
