@@ -54,7 +54,7 @@
   <label for="sunset_d">Job Start Date</label>
   <div class="row">
     <div class="form-group">
-      <div class="col-md-2">
+      <div class="col-md-4">
         <?php echo form_error('started'); ?>
         <select class="form-control" name="started">
           <?php for($i = 1; $i <= 30; $i++): ?>
@@ -67,7 +67,7 @@
         </select>
       </div>
 
-      <div class="col-md-2">
+      <div class="col-md-4">
         <?php echo form_error('startm'); ?>
         <select class="form-control" name="startm">
           <?php for($i = 1; $i <= 12; $i++): ?>
@@ -80,7 +80,7 @@
         </select>
       </div>
 
-      <div class="col-md-2">
+      <div class="col-md-4">
         <?php echo form_error('starty'); ?>
         <select class="form-control" name="starty">
           <?php for ($i = date("Y", strtotime(date("Y"))); $i <= date("Y", strtotime(date("Y").' +3 year')); $i++): ?>

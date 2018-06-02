@@ -225,7 +225,7 @@ class Jobs extends My_Controller
       $page_data['query'] = $this->Jobs_model->get_job($page_data['job_id']);
 
       if ($page_data['query']->num_rows() == 1) {
-        foreach ($page_data['query'] as $row) {
+        foreach ($page_data['query']->result() as $row) {
           $page_data['job_title'] = $row->job_title;
           $page_data['job_id'] = $row->job_id;
           $job_advertiser_name = $row->job_advertiser_name;
