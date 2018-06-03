@@ -173,7 +173,7 @@ class Jobs extends My_Controller
           'maxlength' => '100',
           'size' => '35'
         );
-
+echo "I'm here";
         $this->load->view('templates/header');
         $this->load->view('jobs/create', $page_data);
         $this->load->view('templates/footer');
@@ -193,11 +193,13 @@ class Jobs extends My_Controller
         );
 
         if ($this->Jobs_model->save_job($save_data)) {
+          echo "Job ad Saved Successfully";
           $this->session->set_flashdata('flash_message', 'Job ad Saved Successfully');
-          redirect('jobs/create/');
-        } else {
-          $this->session->set_flashdata('flash_message', 'Error: Job ad was not saved');
           redirect('jobs');
+        } else {
+          echo "Error: Job ad was not saved";
+          $this->session->set_flashdata('flash_message', 'Error: Job ad was not saved');
+          redirect('jobs/create');
         }
 
 

@@ -23,6 +23,7 @@
           <ul class="nav navbar-nav">
               <li class="nav-item"><a href="<?=base_url()?>home">Home</a></li>
               <li class="nav-item"><a href="<?=base_url()?>about">About</a></li>
+              <li class="nav-item"><a href="<?=base_url()?>jobs/create">Create</a></li>
 
           </ul>
           <ul class="nav navbar-nav navbar-right">
