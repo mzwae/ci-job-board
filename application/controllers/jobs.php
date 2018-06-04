@@ -173,7 +173,7 @@ class Jobs extends My_Controller
           'maxlength' => '100',
           'size' => '35'
         );
-echo "I'm here";
+
         $this->load->view('templates/header');
         $this->load->view('jobs/create', $page_data);
         $this->load->view('templates/footer');

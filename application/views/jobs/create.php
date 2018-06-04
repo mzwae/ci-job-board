@@ -55,8 +55,8 @@
   <div class="row">
     <div class="form-group">
       <div class="col-md-4">
-        <?php echo form_error('started'); ?>
-        <select class="form-control" name="started">
+        <?php echo form_error('start_d'); ?>
+        <select class="form-control" name="start_d">
           <?php for($i = 1; $i <= 30; $i++): ?>
             <?php if(date('j', time()) == $i): ?>
               <option selected value="<?=$i?>"><?=date('jS', mktime($i, 0, 0, 0, $i, date('Y')))?></option>
@@ -68,8 +68,8 @@
       </div>
 
       <div class="col-md-4">
-        <?php echo form_error('startm'); ?>
-        <select class="form-control" name="startm">
+        <?php echo form_error('start_m'); ?>
+        <select class="form-control" name="start_m">
           <?php for($i = 1; $i <= 12; $i++): ?>
             <?php if (date('m', time()) == $i): ?>
               <option selected value="<?=$i?>"><?=date('F', mktime(0, 0, 0, $i, 1, date('Y')))?></option>
@@ -81,14 +81,15 @@
       </div>
 
       <div class="col-md-4">
-        <?php echo form_error('starty'); ?>
-        <select class="form-control" name="starty">
+        <?php echo form_error('start_y'); ?>
+        <select class="form-control" name="start_y">
           <?php for ($i = date("Y", strtotime(date("Y"))); $i <= date("Y", strtotime(date("Y").' +3 year')); $i++): ?>
             <option value="<?=$i?>"><?=$i?></option>
           <?php endfor; ?>
         </select>
       </div>
-
+</div>
+</div>
       <div class="form-group">
         <?php echo form_error('job_rate'); ?>
         <label for="job_rate">Job Rate</label>
