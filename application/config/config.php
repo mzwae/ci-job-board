@@ -23,8 +23,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-// $config['base_url'] = 'https://mzapps-ciblog.herokuapp.com/';
-$config['base_url'] = 'http://localhost:8080/ci-job-board/';
+
+
+
+switch (ENVIRONMENT)
+{
+	case 'development':
+       $config['base_url'] = 'http://localhost:8080/ci-job-board/';
+	break;
+
+	case 'production':
+        $config['base_url'] = 'https://mzapps-ci-jobboard.herokuapp.com/';
+		
+	break;
+
+	default:
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'The application environment is not set correctly.';
+		exit(1); // EXIT_ERROR
+}
 
 /*
 |--------------------------------------------------------------------------
